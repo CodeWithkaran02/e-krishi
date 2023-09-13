@@ -33,52 +33,49 @@
   <!--PHP CODE begins-->
 
   <?php
-  $con = mysql_connect("localhost", "root", "");
+  $con = mysqli_connect("localhost", "root", "", "ekrishi");
   if (!$con) {
     echo "connect failed...";
   }
-  mysql_select_db("ekrishi");
-  $err = "";
-  $errp = "";
-  $ea = "";
-  $q = "select * from log_in_verify";
-  $smt = mysql_query($q);
-
-  while ($rs = mysql_fetch_assoc($smt)) {
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-      if ($_POST['r'] == "") {
-        $err = "Please enter your Reg.Id";
-      }
-      if ($_POST['p'] == "") {
-        $errp = "Please enter your Password";
-      }
-      if ($_POST['a'] == "") {
-        $ea = "Please enter your Aadhar Number";
-      }
-      if ($rs['reg_id'] == $_POST["r"]) {
-        if ($rs['pass'] != $_POST["p"] && $rs['aadhar_no'] == $_POST["a"]) {
-          $errp = "Password is wrong";
-        }
-        if ($rs['aadhar_no'] != $_POST["a"] && $rs['pass'] == $_POST["p"]) {
-          $ea = "Aadhar Number is wrong";
-        }
-        if ($rs['pass'] == $_POST["p"] && $rs['aadhar_no'] == $_POST["a"]) {
-          $rg = $rs['reg_id'];
-          $pwd = $rs['pass'];
-          $an = $rs['aadhar_no'];
-          $dt = date("y/m/d");
-          $tm = strftime("%X");
-          $insrtq = "insert into log_in_detail(reg_id,pass,aadhar_no,login_date,login_time) values($rg,'$pwd',$an,'$dt','$tm')";
-          mysql_query("$insrtq");
-          header("location:auctions/auction.php");
-        }
-        if ($rs['pass'] != $_POST["p"] && $rs['aadhar_no'] != $_POST["a"]) {
-          $errp = "Password is wrong";
-          $ea = "Aadhar Number is wrong";
-        }
-      }
-    }
-  }
+  $q = "select * from aprv_order";
+  $smt = mysqli_query($con, $q);
+  if ($smt)
+    echo "ok";
+  // while ($rs = mysql_fetch_assoc($smt)) {
+  //   if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  //     if ($_POST['r'] == "") {
+  //       $err = "Please enter your Reg.Id";
+  //     }
+  //     if ($_POST['p'] == "") {
+  //       $errp = "Please enter your Password";
+  //     }
+  //     if ($_POST['a'] == "") {
+  //       $ea = "Please enter your Aadhar Number";
+  //     }
+  //     if ($rs['reg_id'] == $_POST["r"]) {
+  //       if ($rs['pass'] != $_POST["p"] && $rs['aadhar_no'] == $_POST["a"]) {
+  //         $errp = "Password is wrong";
+  //       }
+  //       if ($rs['aadhar_no'] != $_POST["a"] && $rs['pass'] == $_POST["p"]) {
+  //         $ea = "Aadhar Number is wrong";
+  //       }
+  //       if ($rs['pass'] == $_POST["p"] && $rs['aadhar_no'] == $_POST["a"]) {
+  //         $rg = $rs['reg_id'];
+  //         $pwd = $rs['pass'];
+  //         $an = $rs['aadhar_no'];
+  //         $dt = date("y/m/d");
+  //         $tm = strftime("%X");
+  //         $insrtq = "insert into log_in_detail(reg_id,pass,aadhar_no,login_date,login_time) values($rg,'$pwd',$an,'$dt','$tm')";
+  //         mysql_query("$insrtq");
+  //         header("location:auctions/auction.php");
+  //       }
+  //       if ($rs['pass'] != $_POST["p"] && $rs['aadhar_no'] != $_POST["a"]) {
+  //         $errp = "Password is wrong";
+  //         $ea = "Aadhar Number is wrong";
+  //       }
+  //     }
+  //   }
+  // }
 
   ?>
 
