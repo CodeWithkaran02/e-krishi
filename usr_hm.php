@@ -97,14 +97,14 @@
               <th> Discount</th>
             </tr>
             <?php
-            $con = @mysql_connect("localhost", "root", "");
+            $con = @mysqli_connect("localhost", "root", "", "ekrishi");
             if (!$con) {
               echo "Connection failed..";
             }
-            mysql_select_db("ekrishi");
+            mysqli_select_db("ekrishi");
             $rcrop_q = "select *from rabi";
-            $rcrop_ex = mysql_query($rcrop_q);
-            while ($rcrop_rs = mysql_fetch_assoc($rcrop_ex)) {
+            $rcrop_ex = mysqli_query($rcrop_q);
+            while ($rcrop_rs = mysqli_fetch_assoc($rcrop_ex)) {
             ?> <tr align="center">
                 <td> <?php echo $rcrop_rs['crop_nm'];  ?> </td>
                 <td> <?php $amt = $rcrop_rs['quantity'];
@@ -134,8 +134,8 @@
             </tr>
             <?php
             $kcrop_q = "select *from kharif";
-            $kcrop_ex = mysql_query($kcrop_q);
-            while ($kcrop_rs = mysql_fetch_assoc($kcrop_ex)) {
+            $kcrop_ex = mysqli_query($kcrop_q);
+            while ($kcrop_rs = mysqli_fetch_assoc($kcrop_ex)) {
             ?> <tr align="center">
                 <td> <?php echo $kcrop_rs['crop_nm'];  ?> </td>
                 <td> <?php $amt = $kcrop_rs['quantity'];
@@ -166,8 +166,8 @@
             </tr>
             <?php
             $crop_q = "select *from zaid";
-            $crop_ex = mysql_query($crop_q);
-            while ($crop_rs = mysql_fetch_assoc($crop_ex)) {
+            $crop_ex = mysqli_query($crop_q);
+            while ($crop_rs = mysqli_fetch_assoc($crop_ex)) {
             ?> <tr align="center">
                 <td> <?php echo $crop_rs['crop_nm'];  ?> </td>
                 <td> <?php $amt = $crop_rs['quantity'];
